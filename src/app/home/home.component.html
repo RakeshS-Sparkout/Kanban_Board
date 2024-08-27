@@ -1,0 +1,23 @@
+<div class="board">
+  <div *ngFor="let status of statuses" class="column" 
+       cdkDropList 
+       [cdkDropListData]="tasks[status]" 
+       (cdkDropListDropped)="drop($event)"
+       [cdkDropListId]="status">
+    <p class="heading">{{ status | titlecase }}</p>
+    <button *ngIf="status === 'todo'" mat-raised-button color="primary" (click)="addTask()">Add Task</button>
+    <div *ngFor="let task of tasks[status]" cdkDrag [cdkDragData]="task">
+      <mat-card>
+        <mat-card-title class="title">{{ task.title }}</mat-card-title>
+        <mat-card-content>
+          <p class="content">{{ task.description }}</p>
+          <p class="content">Due date: {{ task.dueDate }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="editTask(task.id)">Edit</button>
+          <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Delete</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

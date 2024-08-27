@@ -1,0 +1,16 @@
+.form-card {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+  }
+  

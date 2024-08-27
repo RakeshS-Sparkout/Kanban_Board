@@ -1,0 +1,26 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" />
+    <mat-error *ngIf="taskForm.controls['title'].invalid && taskForm.controls['title'].touched">
+      Title is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Due Date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dueDate" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="taskForm.controls['dueDate'].invalid && taskForm.controls['dueDate'].touched">
+      Due Date is required
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Save Changes</button>
+</form>

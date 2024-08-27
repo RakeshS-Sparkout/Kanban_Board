@@ -1,0 +1,23 @@
+.task-container {
+  display: flex;
+  overflow-x: auto;
+}
+
+.task-column {
+  flex: 1;
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  min-width: 200px;
+}
+
+.task-card {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.add-task {
+  margin-top: 20px;
+}

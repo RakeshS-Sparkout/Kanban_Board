@@ -1,0 +1,33 @@
+<form class="container" [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+    <mat-card appearance="outlined" class="card">
+        <div class="heading">
+            <h2>Login Form</h2>
+        </div>
+        <div class="form">
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+                @if (loginForm.get('email').invalid && loginForm.get('email').touched) {
+                    <mat-error>Email is a required field!</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password">
+                @if (loginForm.get('password').invalid && loginForm.get('password').touched) {
+                    <mat-error>Password should be of minimum 8 characters, it should contains one uppercase, one lowercase, one number and one special character!</mat-error>
+                    <mat-error></mat-error>                }
+            </mat-form-field>
+            <button mat-flat-button>Submit</button>
+        </div>
+        <div class="account">
+            <p>Don't have an account yet?
+                <a (click)="navigateToRegister()">Sign Up</a>
+            </p>
+        </div>
+    </mat-card>
+</form>
+
+
+
+  

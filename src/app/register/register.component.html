@@ -1,0 +1,54 @@
+<form class="container" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-card appearance="outlined" class="card">
+        <div class="heading">
+            <h2>Register Form</h2>
+        </div>
+        <div class="form">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+                @if (registerForm.get('name')?.invalid && registerForm.get('name').touched){
+                    <mat-error>Name is a required field!</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email">
+                @if (registerForm.get('email')?.hasError('email') && registerForm.get('email').hasError('required')){
+                    <mat-error>Please enter a valid email address</mat-error>
+                } 
+                @if (registerForm.get('email')?.hasError('required')){
+                    <mat-error>Email is <strong>required</strong> field!</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" >
+                @if (registerForm.get('password')?.invalid && registerForm.get('password').touched){
+                    <!-- <ng_template>
+                        Password should be of minimum 8 characters, it should contains one uppercase, one lowercase, one number and one special character!
+                    </ng_template> -->
+                    <mat-error>Password should be of minimum 8 characters, it should contains one uppercase, one lowercase, one number and one special character!</mat-error>
+                    <mat-error></mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Confirm Password</mat-label>
+                <input matInput type="password" formControlName="confirm">
+                @if (registerForm.get('confirm')?.invalid && registerForm.get('confirm').touched){
+                    <mat-error>Confirm Password is a required field!</mat-error>
+                }
+            </mat-form-field>
+            <button mat-flat-button>Submit</button>
+        </div>
+        <div class="account">
+            <p>Already have an account?
+                <a (click)="navigateToLogin()">Sign In</a>
+            </p>
+        </div>
+    </mat-card>
+</form>
+
+
+
+  
