@@ -7,7 +7,12 @@ export class AuthService {
   constructor() {}
 
   isLoggedIn(): boolean {
-    // Example implementation, adjust as needed
-    return !!localStorage.getItem('authToken'); // Replace with your actual token check
+    // Check if user data exists in localStorage
+    return !!localStorage.getItem('loggedInUser');
+  }
+
+  logout(): void {
+    // Clear user data from localStorage on logout
+    localStorage.removeItem('loggedInUser');
   }
 }

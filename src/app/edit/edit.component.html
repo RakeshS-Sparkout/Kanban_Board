@@ -1,26 +1,45 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-  <mat-form-field appearance="fill">
-    <mat-label>Title</mat-label>
-    <input matInput formControlName="title" />
-    <mat-error *ngIf="taskForm.controls['title'].invalid && taskForm.controls['title'].touched">
-      Title is required
-    </mat-error>
-  </mat-form-field>
+<div class="form-container">
+  <mat-card>
+    <mat-card-title>Edit Task</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+          <mat-error *ngIf="taskForm.controls['title'].invalid && taskForm.controls['title'].touched">
+            Title is required
+          </mat-error>
+        </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Description</mat-label>
-    <textarea matInput formControlName="description"></textarea>
-  </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Due Date</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="dueDate" />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error *ngIf="taskForm.controls['dueDate'].invalid && taskForm.controls['dueDate'].touched">
-      Due Date is required
-    </mat-error>
-  </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Due Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dueDate" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="taskForm.controls['dueDate'].invalid && taskForm.controls['dueDate'].touched">
+            Due Date is required
+          </mat-error>
+        </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit">Save Changes</button>
-</form>
+        <!-- Priority Select Field -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="priority">
+            <mat-option *ngFor="let option of priorityOptions" [value]="option">
+              {{ option | titlecase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit">Save Changes</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

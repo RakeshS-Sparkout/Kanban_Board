@@ -10,6 +10,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-edit',
@@ -24,12 +25,15 @@ import { MatInputModule } from '@angular/material/input';
     MatDatepickerModule, 
     MatNativeDateModule, 
     MatButtonModule, 
-    MatCardModule
+    MatCardModule,
+    MatSelectModule
   ]
 })
 export class EditComponent implements OnInit {
   taskForm: FormGroup;
-  taskId: string; // Changed to string
+  taskId: string;
+  priorityOptions: string[] = ['urgent', 'high', 'medium', 'low'];
+  originalStatus: string = '';  // Store the original status
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +45,8 @@ export class EditComponent implements OnInit {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      dueDate: ['', Validators.required]
+      dueDate: ['', Validators.required],
+      priority: ['low', Validators.required]
     });
   }
 
@@ -53,14 +58,14 @@ export class EditComponent implements OnInit {
     if (this.taskId) {
       this.taskService.getTask(this.taskId).subscribe(task => {
         if (task) {
-          console.log('Fetched Task:', task); // Log task details
+          this.originalStatus = task.status;  // Capture the original status
           this.taskForm.patchValue({
             title: task.title,
             description: task.description,
-            dueDate: task.dueDate ? new Date(task.dueDate) : null // Convert to Date object
+            dueDate: task.dueDate ? new Date(task.dueDate) : null,
+            priority: task.priority || 'low'
           });
         } else {
-          console.error('Task not found');
           this.router.navigate(['/home']);
         }
       });
@@ -71,9 +76,9 @@ export class EditComponent implements OnInit {
     if (this.taskForm.valid) {
       const updatedTask: Task = {
         ...this.taskForm.value,
-        id: this.taskId // Ensure ID is included for update
+        id: this.taskId,
+        status: this.originalStatus  // Preserve the original status
       };
-      console.log('Updated Task:', updatedTask); // Log updated task details
       this.taskService.updateTask(this.taskId, updatedTask).subscribe(() => {
         this.router.navigate(['/home']);
       });

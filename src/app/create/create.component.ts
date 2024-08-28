@@ -5,9 +5,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 import { TaskService } from '../task/task.service';
 import { Task } from '../task/task';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create',
@@ -19,11 +23,18 @@ import { Task } from '../task/task';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatSelectModule,
+    CommonModule
   ]
 })
 export class CreateComponent {
   taskForm: FormGroup;
+
+  // Priority options
+  priorityOptions: string[] = ['urgent', 'high', 'medium', 'low'];
 
   constructor(
     private taskService: TaskService,
@@ -33,8 +44,8 @@ export class CreateComponent {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      dueDate: [new Date(), Validators.required],
-      // Status is not included in the form and will be set to 'todo' by default
+      dueDate: [new Date(), Validators.required],  // Initial value as current date
+      priority: ['low', Validators.required]  // Default value
     });
   }
 
@@ -42,7 +53,7 @@ export class CreateComponent {
     if (this.taskForm.valid) {
       const newTask: Task = { ...this.taskForm.value, status: 'todo' };
       this.taskService.createTask(newTask).subscribe(() => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/']);  // Navigate to home or task list after creation
       });
     }
   }

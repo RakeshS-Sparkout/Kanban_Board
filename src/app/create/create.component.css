@@ -1,16 +1,18 @@
-.form-card {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-  }
-  
-  .form-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 16px;
-  }
-  
-  .mat-form-field {
-    width: 100%;
-  }
-  
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height of the viewport */
+  background-color: #f5f5f5; /* Optional: Light background for contrast */
+}
+
+.task-card {
+  width: 400px; /* Set a fixed width for the card */
+  padding: 20px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* Align the submit button to the right */
+  margin-top: 20px;
+}

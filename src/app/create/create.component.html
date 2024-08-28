@@ -1,22 +1,45 @@
-<form [formGroup]="taskForm" (ngSubmit)="createTask()">
-  <mat-form-field appearance="fill">
-    <mat-label>Title</mat-label>
-    <input matInput formControlName="title">
-    <mat-error *ngIf="taskForm.controls['title'].hasError('required')">Title is required</mat-error>
-  </mat-form-field>
+<div class="form-container">
+  <mat-card class="task-card">
+    <mat-card-title>Create Task</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="taskForm" (ngSubmit)="createTask()">
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title">
+          <mat-error *ngIf="taskForm.controls['title'].hasError('required')">
+            Title is required
+          </mat-error>
+        </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Description</mat-label>
-    <textarea matInput formControlName="description"></textarea>
-  </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Due Date</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="dueDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error *ngIf="taskForm.controls['dueDate'].hasError('required')">Due Date is required</mat-error>
-  </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Due Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dueDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="taskForm.controls['dueDate'].hasError('required')">
+            Due Date is required
+          </mat-error>
+        </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit">Create Task</button>
-</form>
+        <!-- Priority Select Field -->
+        <mat-form-field appearance="fill">
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="priority">
+            <mat-option *ngFor="let option of priorityOptions" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit">Create Task</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

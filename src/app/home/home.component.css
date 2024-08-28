@@ -1,23 +1,39 @@
-.task-container {
+/* Container for Filter and Sort Controls */
+.filters-container {
   display: flex;
-  overflow-x: auto;
-}
-
-.task-column {
-  flex: 1;
-  padding: 20px;
-  margin: 10px;
-  border: 1px solid #ccc;
-  min-width: 200px;
-}
-
-.task-card {
+  justify-content: flex-end; /* Aligns items to the right */
   padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #ccc;
 }
 
-.add-task {
-  margin-top: 20px;
+/* Ensure each form field is smaller and has consistent spacing */
+.control-field {
+  width: 200px; /* Adjust the width as needed */
+  margin-left: 10px; /* Adds space between filter and sort */
+}
+
+/* Layout for task columns */
+.board {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.column {
+  width: 18%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  min-height: 400px;
+}
+
+.heading {
+  text-align: center;
+  font-weight: bold;
+}
+
+mat-card {
+  margin-bottom: 10px;
 }
