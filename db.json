@@ -22,15 +22,15 @@
       "dueDate": "2024-08-29T18:30:00.000Z",
       "priority": "medium",
       "id": "93e8",
-      "status": "inProgress"
+      "status": "testing"
     },
     {
       "title": "Task 2",
       "description": "Second task",
       "dueDate": "2024-08-30T18:30:00.000Z",
-      "priority": "high",
-      "id": "7775",
-      "status": "done"
+      "priority": "urgent",
+      "status": "todo",
+      "id": "7775"
     }
   ]
 }

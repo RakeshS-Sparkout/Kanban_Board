@@ -23,6 +23,10 @@ export class TaskService {
 
   // Create a new task
   createTask(task: Task): Observable<Task> {
+    // Ensure ID is not empty for new tasks
+    if (!task.id) {
+      task.id = this.generateUniqueId(); // Generate ID if needed
+    }
     return this.http.post<Task>(this.apiUrl, task);
   }
 
@@ -39,5 +43,9 @@ export class TaskService {
   // Fetch tasks by status
   getTasksByStatus(status: string): Observable<Task[]> {
     return this.http.get<Task[]>(`${this.apiUrl}?status=${status}`);
+  }
+
+  private generateUniqueId(): string {
+    return Math.random().toString(36).substr(2, 9); // Simple unique ID generator
   }
 }
